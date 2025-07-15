@@ -9,6 +9,7 @@ app.use(express.json());
 dotenv.config();
 const port = process.env.PORT;
 
+
 app.get('/', (req, res) => {
     res.status(200).json({
         success: true,
@@ -16,8 +17,12 @@ app.get('/', (req, res) => {
     });
 });
 
+
+// this request will go to routes folder to the main router and diffrent controllers will executed
 app.use('/api/v1/user', Router);
 
+
+// connectDB function h jo database connect krega jb index file run hogi
 connectDB();
 
 app.listen(port, () => {

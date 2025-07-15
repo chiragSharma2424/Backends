@@ -7,9 +7,8 @@
  - controllers/ # Route handlers and business logic
  - models/ # Mongoose models / schema definitions
  - routes/ # API route definitions
- - config/ # Configuration files (e.g., DB connection)
+ - database/ # Connection of database, we export a function
  - middlewares/ # Custom middleware (auth, error handling)
- - utils/ # Utility functions
  - .env # Environment variables
  - index.js # Entry point
 

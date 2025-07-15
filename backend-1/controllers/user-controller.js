@@ -35,3 +35,14 @@ export const userController = async (req, res) => {
         })
     }
 }
+
+export const login = async (req, res) => {
+    try {
+
+    } catch(err) {
+        console.log("error in controller", err);
+        return res.status(500).json({
+            msg: "internal server error"
+        })
+    }
+}
