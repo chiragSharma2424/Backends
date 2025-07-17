@@ -75,3 +75,27 @@ export const login = async (req, res) => {
         })
     }
 }
+
+
+// wrinting controller to get all users
+export const getAllUser = async (req, res) => {
+    try {
+        const user = await userModel.find();
+        if(user.length == 0) {
+            return res.status(200).json({
+                msg: "No user found",
+                users: []
+            })
+        } else {
+            return res.status(200).json({
+                msg: "here is the list of users",
+                users: user
+            })
+        }
+    } catch(err) {
+        console.log(err);
+        return res.status(400).json({
+            msg: "internal server error"
+        });
+    }
+}
