@@ -69,6 +69,22 @@
             margin: 5px 0;
             color: #666;
         }
+        .delete-btn {
+       background-color: #e74c3c;
+       color: #fff;
+       padding: 8px 16px;
+       border: none;
+       border-radius: 6px;
+       cursor: pointer;
+       font-size: 14px;
+       font-weight: bold;
+       transition: background 0.3s ease, transform 0.3s ease;
+     }
+
+    .delete-btn:hover {
+    background-color: #c0392b;
+    transform: scale(1.05);
+    }
     </style>
 </head>
 <body>
@@ -101,11 +117,38 @@
                     para.innerHTML = `Email: ${users[i].email}`;
                     var para2 = document.createElement('p');
                     para2.innerHTML = ` Password: ${users[i].password}`;
+                    var para3 = document.createElement('p');
+                    para3.innerHTML = `Id: ${users[i].id}`;
+                    var butn = document.createElement('button');
+                    butn.classList.add('delete-btn');
+                    butn.innerHTML = "Delete";
+                    butn.addEventListener('click', () => {
+                        deleteUser(users[i].id);
+                    })
 
                     show.appendChild(heading);
                     show.appendChild(para);
                     show.appendChild(para2);
+                    show.appendChild(para3);
+                    show.appendChild(butn);
                 }
+            }).catch((err) => {
+                console.log('something went wrong', err);
+            })
+        }
+
+
+
+        function deleteUser(id) {
+            fetch(`http://localhost:3000/api/v1/user/delete${id}`, {
+                method: "DELETE",
+                headers: {
+                      "Content-Type": "application/json"
+                 }
+            }).then((res) => {
+                return res.json()
+            }).then((data) => {
+                console.log("user deleted successfully", data);
             }).catch((err) => {
                 console.log('something went wrong', err);
             })

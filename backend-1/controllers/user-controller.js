@@ -25,7 +25,8 @@ export const userController = async (req, res) => {
         const newUser = await userModel.create({
             name: name,
             email: email,
-            password: password
+            password: password,
+            id: Math.floor(Math.random() * 100)
         });
 
         return res.status(200).json({
@@ -100,3 +101,29 @@ export const getAllUser = async (req, res) => {
     }
 }
 
+
+
+
+// this controller will delete the user from database
+export const deleteUser = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await userModel.findById(id);
+
+        if(!user) {
+            return res.status(400).json({
+                msg: "user not found"
+            })
+        } else {
+            await userModel.findByIdAndDelete({id: req.params.id});
+            return res.status(200).json({
+                msg: "user delete successfully"
+            })
+        }
+    } catch (err) {
+        console.log(err);
+        return res.json({
+            msg: "Internal server error"
+        });
+    }
+}
