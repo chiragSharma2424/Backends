@@ -41,7 +41,7 @@ export const userController = async (req, res) => {
 }
 
 
-// this is our login controller we have to take email, password in body and genrate a toke for it
+// this is our login controller we have to take email, password in body and genrate a token for it
 export const login = async (req, res) => {
     try {
         const { email, password } = req.body;

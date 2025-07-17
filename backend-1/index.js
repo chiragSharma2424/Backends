@@ -2,8 +2,12 @@ import express from 'express';
 import dotenv from 'dotenv';
 import Router from './routes/user-routes.js';
 import { connectDB } from './datbase/db.js';
+import cors from 'cors';
 const app = express();
 app.use(express.json());
+app.use(cors({
+    origin: '*'
+}));
 
 // here we dont have to give path of .env because it was present in root directory
 dotenv.config();
