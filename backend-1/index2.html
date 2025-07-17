@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Display</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #fff;
+        }
+
+        .fetch-btn {
+            background: linear-gradient(135deg, #4a90e2, #6e8efb);
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .fetch-btn:hover {
+            background: linear-gradient(135deg, #3f73d9, #5c6bc0);
+            transform: scale(1.08);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .user-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+        .user-card {
+            background: #fff;
+            color: #333;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .user-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-card h3 {
+            margin: 0 0 10px;
+            color: #4a4a4a;
+        }
+
+        .user-card p {
+            margin: 5px 0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <button class="fetch-btn" id="btn" onclick="getAllusers()">Fetch Users</button>
+
+    <div class="user-container">
+        <div class="user-card" id="card">
+            
+        </div>
+        
+    </div>
+
+
+    <script>
+        function getAllusers() {
+            var btn = document.getElementById('btn');
+            var show = document.getElementById('card');
+
+            fetch('http://localhost:3000/api/v1/user/getusers', {
+                method: "GET"
+            }).then((resp) => {
+                return resp.json();
+            }).then((data) => {
+                console.log(data);
+                const users = data.users
+                for(var i = 0; i < users.length; i++) {
+                    var heading = document.createElement('h3');
+                    heading.innerHTML = `Name: ${users[i].name}`;
+                    var para = document.createElement('p');
+                    para.innerHTML = `Email: ${users[i].email}`;
+                    var para2 = document.createElement('p');
+                    para2.innerHTML = ` Password: ${users[i].password}`;
+
+                    show.appendChild(heading);
+                    show.appendChild(para);
+                    show.appendChild(para2);
+                }
+            }).catch((err) => {
+                console.log('something went wrong', err);
+            })
+        }
+    </script>
+</body>
+</html>

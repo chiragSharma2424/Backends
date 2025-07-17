@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frontend</title>
     <style>
-    /* Page background */
     body {
         margin: 0;
         padding: 0;
@@ -17,7 +16,6 @@
         font-family: 'Segoe UI', Tahoma, sans-serif;
     }
 
-    /* Container */
     .container {
         width: 350px;
         padding: 30px;
@@ -29,15 +27,12 @@
         gap: 18px;
         animation: fadeIn 0.8s ease-in-out;
     }
-
-    /* Title */
     .title {
         text-align: center;
         color: #4a4a4a;
         margin-bottom: 10px;
     }
 
-    /* Input fields */
     .container input {
         padding: 12px;
         font-size: 16px;
@@ -48,14 +43,13 @@
         background: #f9f9f9;
     }
 
-    /* Input hover + focus effect */
     .container input:focus {
         border-color: #6e8efb;
         box-shadow: 0 0 8px rgba(110, 142, 251, 0.4);
         background: #fff;
     }
 
-    /* Button */
+
     .container button {
         padding: 12px;
         font-size: 18px;
@@ -68,14 +62,12 @@
         transition: all 0.3s ease;
     }
 
-    /* Button hover effect */
     .container button:hover {
         background: linear-gradient(135deg, #5a78e3, #9469d6);
         transform: scale(1.05);
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     }
 
-    /* Animation for container */
     @keyframes fadeIn {
         0% {
             opacity: 0;
@@ -102,7 +94,6 @@
             var name = document.getElementById('name').value;
             var email = document.getElementById('email').value;
             var password = document.getElementById('pass').value;
-            console.log(name ,email, password);
 
             fetch('http://localhost:3000/api/v1/user/register', {
                 method: "POST",
@@ -124,6 +115,8 @@
             })
         }
 
+
+        // this is the api for getting all users from database
         function getUsers() {
             fetch('http://localhost:3000/api/v1/user/getusers', {
                 method: "GET"
