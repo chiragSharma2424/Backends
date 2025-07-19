@@ -48,12 +48,28 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
+        
+        if(!email || !password) {
+            return res.status(400).json({
+                success: false,
+                msg: "all fields are required"
+            });
+        }
+
 
     } catch(err) {
         console.log(err);
         return res.status(500).json({
             success: false,
             msg: "internal server error"
+        })
+    }
+
+    const user = await userModel.findOne({ email });
+    if(!user) {
+        return res.status(400).json({
+            success: false,
+            msg: "user not found"
         })
     }
 }
