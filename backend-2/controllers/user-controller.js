@@ -1,6 +1,7 @@
 import userModel from "../models/user-model.js";
 import jwt from 'jsonwebtoken';
-
+import dotenv from 'dotenv';
+dotenv.config();
 
 const signup = async (req, res) => {
     try {
@@ -56,20 +57,27 @@ const login = async (req, res) => {
             });
         }
 
+        const user = userModel.findOne({ email });
+        if(!user) {
+            return res.status(400).json({
+                success: false,
+                msg: "user not found"
+            })
+        }
 
+        const token = jwt.sign({ email, password }, process.env.JWT_USER_SECRET);
+
+        return res.status(200).json({
+            success: true,
+            msg: "user login successfully",
+            token: token
+        });
+        
     } catch(err) {
         console.log(err);
         return res.status(500).json({
             success: false,
             msg: "internal server error"
-        })
-    }
-
-    const user = await userModel.findOne({ email });
-    if(!user) {
-        return res.status(400).json({
-            success: false,
-            msg: "user not found"
         })
     }
 }

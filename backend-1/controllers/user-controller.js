@@ -54,7 +54,7 @@ export const login = async (req, res) => {
         }
 
         // have to check if user exist
-        const existingUser = userModel.findOne({email});
+        const existingUser = await userModel.findOne({email});
         if(!existingUser) {
             return res.status(400).json({
                 msg: "invalid credentials"
