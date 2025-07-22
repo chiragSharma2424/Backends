@@ -3,6 +3,8 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config();
 
+
+// now we have to implement two same controller for admin also
 export const signup = async (req, res) => {
     try {
         const { firstName, lastName, email, password } = req.body;
