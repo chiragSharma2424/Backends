@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { connectDB } from './database/db.js';
+import Router from './routes/auth-routes.js';
 
 dotenv.config();
 const app = express();
@@ -13,6 +14,10 @@ app.use(cookieParser());
 
 // credentials true for cokkie, to send cookie
 app.use(cors({ credentials: true }));
+
+
+// api endpoints
+app.use('/api/auth', Router);
 
 
 app.get('/', (req, res) => {
