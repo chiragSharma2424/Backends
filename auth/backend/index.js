@@ -20,11 +20,12 @@ app.use(cors({ credentials: true }));
 app.use('/api/auth', Router);
 
 
+// we can send a array also
 app.get('/', (req, res) => {
-    return res.status(200).json({
+    return res.status(200).json([{
         success: true,
         msg: "api is working"
-    })
+    }])
 });
 
 connectDB();

@@ -6,6 +6,19 @@
     <title>Frontend</title>
 </head>
 <body>
-    
+    <button onclick="getData()">Get</button>
+
+    <script>
+        function getData() {
+            fetch('http://localhost:3000').then((resp) => {
+                console.log(resp);
+                return resp.json();
+            }).then((data) => {
+                console.log(data);
+            }).catch((err) => {
+                console.log("something went wrong", err);
+            })
+        }
+    </script>
 </body>
 </html>

@@ -42,9 +42,11 @@ export const register = async (req, res) => {
         });
 
 
+        // actually we can also send user in respone
         return res.status(200).json({
             success: true,
-            message: "user register successfully"
+            message: "user register successfully",
+            user: newUser
         });
 
     } catch(err) {

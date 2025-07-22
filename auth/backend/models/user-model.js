@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     isAccountVerified: {type: Boolean, default: false},
     resetOtp: {type: String, default: ''},
     resetOtpExpireAt: {type: Number, default: 0},
-});
+}, {timestamps: true});
 
 const userModel = mongoose.model("user", userSchema);
 export default userModel;
