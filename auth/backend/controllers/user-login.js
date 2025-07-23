@@ -4,9 +4,9 @@ import jwt from 'jsonwebtoken';
 
 
 const login = async (req, res) => {
-    const { email, passsword } = req.body;
+    const { email, password } = req.body;
 
-    if(!email || !passsword) {
+    if(!email || !password) {
         return res.status(400).json({
             success: false,
             message: "email and password are required"
@@ -23,7 +23,7 @@ const login = async (req, res) => {
             })
         }
 
-        const isMatch = await bcrypt.compare(passsword, user.password);
+        const isMatch = await bcrypt.compare(password, user.password);
 
         if(!isMatch) {
             return res.json({

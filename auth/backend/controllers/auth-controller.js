@@ -57,3 +57,5 @@ export const register = async (req, res) => {
         })
     }
 }
+
+// now we have to implement the email functionality
