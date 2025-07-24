@@ -45,6 +45,7 @@ export const sendVerifyOtp = async (req, res) => {
 }
 
 
+// user id token se milege or token cookie me hoga
 
 
 export const verifyEmail = async (req, res) => {
@@ -56,6 +57,7 @@ export const verifyEmail = async (req, res) => {
             message: "missing details"
         })
     }
+
 
     try {
         // user ko database me find kro
@@ -69,6 +71,7 @@ export const verifyEmail = async (req, res) => {
             })
         }
 
+        
         // ab database me vreifyotp field ko check kro kya wo equal h ya nhi otp k
         if(user.verifyOtp === ' ' || user.verifyOtp !== otp) {
             return res.status(400).json({
