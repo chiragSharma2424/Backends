@@ -8,6 +8,8 @@ import logout from '../controllers/user-logout.js';
 import userAuth from '../middleware/userAuth.js';
 import { sendVerifyOtp, verifyEmail } from '../controllers/email-verification.js';
 import isAuhtenticated from '../controllers/is-authenticated.js';
+import { resetPassword, sendResetOtp } from '../controllers/password-reset.js';
+import { getUserData } from '../controllers/user-details.js';
 
 
 Router.post('/register', register);
@@ -16,5 +18,8 @@ Router.post('/logout', logout);
 Router.post('/send-verify-otp', userAuth, sendVerifyOtp);
 Router.post('/verify-account', userAuth, verifyEmail);
 Router.post('/is-auth', userAuth, isAuhtenticated);
+Router.post('/send-reset-otp', sendResetOtp);
+Router.post('/reset-password', resetPassword);
+Router.get('/data', userAuth, getUserData);
 
 export default Router;
