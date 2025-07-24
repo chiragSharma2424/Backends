@@ -5,35 +5,32 @@ dotenv.config();
 const userAuth = async (req, res, next) => {
     const { token } = req.cookies;
 
-    if(!token) {
-        return res.json({
+    if (!token) {
+        return res.status(401).json({
             success: false,
-            msg: "not authorized login again"
-        })
+            msg: "Not authorized. Please log in again.",
+        });
     }
-
 
     try {
-        // now decode the token
         const tokenDecode = jwt.verify(token, process.env.JWT_SECRET);
 
-        if(tokenDecode.id) {
-            req.body.userId = tokenDecode.id
+        if (tokenDecode?.id) {
+            req.userId = tokenDecode.id;
+            next();
         } else {
-            return res.json({
+            return res.status(401).json({
                 success: false,
-                msg: "not authorized login again"
-            })
+                msg: "Invalid token. Login again.",
+            });
         }
-
-        next();
-    } catch(err) {
+    } catch (err) {
         console.log("error in middleware", err);
-        return res.json({
+        return res.status(401).json({
             success: false,
-            msg: "not authorized"
-        })
+            msg: "Authorization failed",
+        });
     }
-}
+};
 
 export default userAuth;
