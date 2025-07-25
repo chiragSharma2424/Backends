@@ -13,6 +13,7 @@
     <input type="text" placeholder="Email" id="ip2">
     <input type="text" placeholder="Password" id="ip3">
     <button onclick="registerUser()">Register</button>
+    <button onclick="logoutUser()">Logout</button>
   </div>
 
 
@@ -42,6 +43,20 @@
             document.getElementById('ip3').value = " ";
         }).catch((err) => {
             console.log(`something went wrong ${err}`);
+        })
+    }
+
+    function logoutUser() {
+        var url = 'http://localhost:3000/api/auth/logout';
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "Application/json"
+            }
+        }).then(() => {
+            console.log("User log out successfully")
+        }).catch((err) => {
+            console.log("something went wrong, user first need to login", err)
         })
     }
   </script>
