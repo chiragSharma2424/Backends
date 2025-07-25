@@ -107,10 +107,10 @@
   <div id="product-container">
     <div class="product">
       <h2 id="title"></h2>
-      <img src="" alt="Product Image">
-      <p><strong>Price:</strong> $99.99</p>
-      <p><strong>Description:</strong> Product description goes here.</p>
-      <p><strong>Category:</strong> Category name</p>
+      <img src="" alt="Product Image" id="img">
+      <p id="p1"></p>
+      <p id="p2"></p>
+      <p id="p3"></p>
     </div>
   </div>
 
@@ -129,7 +129,19 @@
 
             // title render hoga
             var titleRender = document.getElementById('title');
-            titleRender.innerHTML = data[0].title;
+            titleRender.innerHTML = `Title: ${data[0].title}`;
+
+            var imgaeRender = document.getElementById('img');
+            imgaeRender.src = data[0].image;
+
+            var priceRender = document.getElementById('p1');
+            priceRender.innerHTML = `Price: ${data[0].price}`;
+
+            var ratingRender = document.getElementById('p2');
+            ratingRender.innerHTML = `Rating: ${JSON.stringify(data[0].rating)}`;
+
+            var descriptionRender = document.getElementById('p3');
+            descriptionRender.innerHTML = `Description: ${data[0].description}`;
         }).catch((err) => {
             console.log(`something went wrong ${err}`);
         })
