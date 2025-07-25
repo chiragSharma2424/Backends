@@ -12,7 +12,7 @@
     <input type="text" placeholder="Name" id="ip1">
     <input type="text" placeholder="Email" id="ip2">
     <input type="text" placeholder="Password" id="ip3">
-    <button onclick="">Register</button>
+    <button onclick="registerUser()">Register</button>
   </div>
 
 
@@ -20,7 +20,29 @@
   <script>
     function registerUser() {
         var name = document.getElementById('ip1').value;
-        var Email = document.getElementById('ip2').value
+        var email = document.getElementById('ip2').value;
+        var password = document.getElementById('ip3').value;
+        
+
+        var url = 'http://localhost:3000/api/auth/register';
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "Application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                password: password
+            })
+        }).then((resp) => {
+            console.log(`post request to ${url} was sended`);
+            document.getElementById('ip1').value = " ";
+            document.getElementById('ip2').value = " ";
+            document.getElementById('ip3').value = " ";
+        }).catch((err) => {
+            console.log(`something went wrong ${err}`);
+        })
     }
   </script>
 </body>
