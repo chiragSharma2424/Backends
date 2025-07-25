@@ -4,21 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frontend</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button onclick="getData()">Get</button>
-
-    <script>
-        function getData() {
-            fetch('http://localhost:3000').then((resp) => {
-                console.log(resp);
-                return resp.json();
-            }).then((data) => {
-                console.log(data);
-            }).catch((err) => {
-                console.log("something went wrong", err);
-            })
-        }
-    </script>
+  <div id="container">
+    <h1>Welcome to my authentication app</h1>
+    <input type="text" placeholder="Name">
+    <input type="text" placeholder="Email">
+    <input type="text" placeholder="Password">
+    <button>Register</button>
+  </div>
 </body>
 </html>
