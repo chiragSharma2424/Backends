@@ -26,7 +26,7 @@ app.post('/admin/signup', (req, res) => {
     const existingAdmin = ADMINS.find((a) => {
     return a.username === admin.username;
      });
-     
+
     if(existingAdmin) {
         return res.status(400).json({
             message: "Admin already exists"
@@ -42,6 +42,10 @@ app.post('/admin/signup', (req, res) => {
     }
 
 });
+
+app.post('/admin/login', (req, res) => {
+    const { username, password } = req.headers;
+})
 
 
 app.listen(port, () => {
