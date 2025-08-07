@@ -45,7 +45,20 @@ app.post('/admin/signup', (req, res) => {
 
 app.post('/admin/login', (req, res) => {
     const { username, password } = req.headers;
-})
+    const admin = ADMINS.find(a => a.username === username && a.password === password);
+
+    if(admin) {
+        const token = jwt.sign({username, password}, secretkey, {expiresIn: '1h'});
+        res.json({
+            message: "Logged in successfully",
+            token: token
+        })
+    } else {
+        res.json({
+            message: "Authentication failed"
+        })
+    }
+});
 
 
 app.listen(port, () => {
