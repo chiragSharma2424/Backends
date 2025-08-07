@@ -40,7 +40,29 @@ app.post('/admin/signup', (req, res) => {
             token: token
         })
     }
+});
 
+
+app.post('/user/signup', (req, res) => {
+    const user = req.body;
+
+    const existingUser = USERS.find((u) => {
+        return u.username == user.username
+    });
+
+    if(existingUser) {
+        return res.status(403).json({
+            message: "User exists already"
+        })
+    } else {
+        USERS.push(user);
+        console.log(USERS);
+        const token = jwt.sign(user, secretkey, { expiresIn: '1h' });
+        return res.status(200).json({
+            message: "User created successfully",
+            token: token
+        })
+    }
 });
 
 app.post('/admin/login', (req, res) => {
@@ -56,6 +78,23 @@ app.post('/admin/login', (req, res) => {
     } else {
         res.json({
             message: "Authentication failed"
+        })
+    }
+});
+
+app.post('/user/login', (req, res) => {
+    const {username, password} = req.headers;
+    const user = USERS.find(u => u.username === username && u.password === password);
+
+    if(user) {
+        const token = jwt.sign({username, password}, secretkey, { expiresIn: '1h' });
+        res.json({
+            message: "Logged in successfully",
+            token: token
+        })
+    } else {
+        res.status(403).json({
+            message: "User authentication failed"
         })
     }
 });
