@@ -12,9 +12,8 @@ export const login = async (req, res) => {
             })
         }
 
-
         // find method array return krta h
-        const existingUser = await userModel.find({email});
+        const existingUser = await userModel.findOne({email})
         if(existingUser) {
             return res.status(400).json({
                 message: "User already exists",
