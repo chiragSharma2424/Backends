@@ -36,3 +36,11 @@ export const login = async (req, res) => {
         console.log(`error in login controller ${err}`);
     }
 }
+
+export const signin = async (req, res) => {
+    try {
+
+    } catch(err) {
+        console.log(`error in signin controller ${err}`);
+    }
+}
