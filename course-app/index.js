@@ -12,8 +12,7 @@ app.use(express.json());
 
 
 // global routes of user
-app.use('/api/v1/users', userRouter);
-
+app.use('/api/v1/user', userRouter);
 
 // global routes of admin
 app.use('/api/v1/admin', adminRouter);
