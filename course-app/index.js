@@ -4,10 +4,11 @@ import cors from 'cors';
 import connectDB from './config/db.js';
 import userRouter from './routes/user-routes.js';
 import adminRouter from './routes/admin-routes.js';
+
 dotenv.config();
 const app = express();
 const port = process.env.PORT;
-app.use(cors());
+app.use(cors({credentials: true}));
 app.use(express.json());
 
 
