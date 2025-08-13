@@ -18,7 +18,8 @@ app.use('/api/v1/user', userRouter);
 app.use('/api/v1/admin', adminRouter);
 
 app.get('/', (req, res) => {
-    return res.json({
+    return res.status(200).json({
+	success: true,
         msg: "api is working"
     })
 });
