@@ -12,6 +12,7 @@ app.use(cors({credentials: true}));
 app.use(express.json());
 
 
+
 // global routes of user
 app.use('/api/v1/user', userRouter);
 
@@ -22,7 +23,7 @@ app.get('/', (req, res) => {
     return res.status(200).json({
 	success: true,
         msg: "api is working"
-    })
+    });
 });
 
 

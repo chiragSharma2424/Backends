@@ -42,7 +42,15 @@ export const login = async (req, res) => {
 
 export const signin = async (req, res) => {
     try {
+        const { email, password } = req.body;
 
+        if(!email || !password) {
+            return res.status(400).json({
+                message: "All fields are required"
+            })
+        }
+
+        
     } catch(err) {
         console.log(`error in amdin controller ${err}`);
     }
