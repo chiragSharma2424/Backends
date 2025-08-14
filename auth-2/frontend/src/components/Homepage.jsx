@@ -23,13 +23,12 @@ function Homepage() {
             Sign In </button>
        
       </div>
-
      
       <footer className="absolute bottom-4 text-sm opacity-80">
         © {new Date().getFullYear()} Auth System. All rights reserved.
       </footer>
     </div>
-  );
+  )
 }
 
 export default Homepage;

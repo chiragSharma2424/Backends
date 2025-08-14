@@ -11,9 +11,17 @@ function Navbar() {
         <h1 className="text-white text-2xl font-bold">MyAuthApp</h1>
 
         <ul className="hidden md:flex space-x-6 text-white font-medium">
-          <li className="hover:text-yellow-300 cursor-pointer transition">Contact</li>
-          <li className="hover:text-yellow-300 cursor-pointer transition">About</li>
-          <li className="hover:text-yellow-300 cursor-pointer transition">Email</li>
+          <li className="hover:text-yellow-300 cursor-pointer transition" onClick={() => {
+              navigate('/about');
+          }}>Contact</li>
+
+          <li className="hover:text-yellow-300 cursor-pointer transition" onClick={() => {
+              navigate('/about')
+          }}>About</li>
+
+          <li className="hover:text-yellow-300 cursor-pointer transition" onClick={() => {
+              navigate('/about');
+          }}>Email</li>
         </ul>
 
    
@@ -24,11 +32,16 @@ function Navbar() {
                 navigate('/signup')
              }}>Sign-up</button>
 
-          <button className="bg-yellow-400 text-white px-4 py-2 rounded-lg font-semibold hover:bg-yellow-500 transition"
+             <button className="bg-white text-indigo-600 px-4 py-2 rounded-lg font-semibold hover:bg-indigo-100 transition"
              onClick={() => {
-                navigate('/signin');
+                navigate('/signin')
              }}>Sign-in</button>
-             
+
+             <button className="bg-white text-indigo-600 px-4 py-2 rounded-lg font-semibold hover:bg-indigo-100 transition"
+             onClick={() => {
+                navigate('/')
+             }}>Homepage</button>
+
         </div>
       </div>
     </nav>
