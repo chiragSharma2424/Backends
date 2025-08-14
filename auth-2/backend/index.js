@@ -1,11 +1,12 @@
 import express from 'express';
+const app = express();
+import dotenv from "dotenv";
+dotenv.config();
 import bcrypt from 'bcryptjs';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-dotenv.config();
-const app = express();
+
 app.use(express.json());
 app.use(cors());
 const port = process.env.PORT;
@@ -71,9 +72,12 @@ app.post('/api/v1/signup', async (req, res) => {
             password: hashedPassword
         });
 
+        const token = jwt.sign({fullName, email, password}, process.env.JWT_SECRET, {expiresIn: '1h'});
+
         return res.status(200).json({
             message: "user created successfully",
-            user: newUser
+            user: newUser,
+            token: token
         });
 
     } catch(err) {
@@ -112,11 +116,12 @@ app.post('/api/v1/signin', async (req, res) => {
             });
         }
 
-        const token = jwt.sign({id: existingUser._id}, process.env.JWT_SECRET, {expiresIn: '1h'});
+        const token = jwt.sign({email, password}, process.env.JWT_SECRET, {expiresIn: '1h'});
+        console.log("generated token", token);
 
         return res.status(200).json({
             message: "signin successfully",
-            token: token
+            token
         });
 
     } catch(err) {

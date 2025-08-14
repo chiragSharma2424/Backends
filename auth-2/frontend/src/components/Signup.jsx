@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 function Signup() {
     const [fullName, setName] = useState('');
-    const [email, setEamil] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
   return (
@@ -23,7 +23,7 @@ function Signup() {
         
         <input type="email" placeholder="Email" className="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
            onChange={(e) => {
-               setEamil(e.target.value);
+               setEmail(e.target.value);
            }}
         />
 
