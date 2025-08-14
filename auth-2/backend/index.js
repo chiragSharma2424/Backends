@@ -1,4 +1,5 @@
 import express from 'express';
+import bcrypt from 'bcryptjs';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
@@ -41,7 +42,90 @@ app.get('/', (req, res) => {
 });
 
 
+// signup function
+app.post('/api/v1/signup', async (req, res) => {
+    try {
+        const { fullName, email, password } = req.body;
 
+        if(!fullName || !email || !password) {
+            return res.status(400).json({
+                message: "Invalid credentials"
+            });
+        }
+
+        // check kro user already exists krta h db me
+        const existingUser = await User.findOne({email});
+        if(existingUser) {
+            return res.status(400).json({
+                message: "user already exists in database"
+            })
+        }
+
+        // password hashing kr do
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // nhi exists krta tw create a new user
+        const newUser = await User.create({
+            fullName: fullName,
+            email: email,
+            password: hashedPassword
+        });
+
+        return res.status(200).json({
+            message: "user created successfully",
+            user: newUser
+        });
+
+    } catch(err) {
+        console.log(`error in signup function ${err}`);
+        return res.status(500).json({
+            message: "server error"
+        })
+    }
+});
+
+
+
+// signin function, yha pe token assign hoga
+app.post('/api/v1/signin', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        if(!email || !password) {
+            return res.status(400).json({
+                message: "Invalid credentials"
+            })
+        }
+
+        const existingUser = await User.findOne({email});
+        if(!existingUser) {
+            return res.status(400).json({
+                message: "user not found"
+            })
+        }
+
+        // compare the password
+        const isMatchPassword = bcrypt.compare(password, existingUser.password);
+        if(!isMatchPassword) {
+            return res.status(400).json({
+                message: "icorrect password"
+            });
+        }
+
+        const token = jwt.sign({id: existingUser._id}, process.env.JWT_SECRET, {expiresIn: '1h'});
+
+        return res.status(200).json({
+            message: "signin successfully",
+            token: token
+        });
+
+    } catch(err) {
+        console.log(`error in signin function ${err}`);
+        return res.status(500).json({
+            message: "server error"
+        })
+    }
+});
 
 // function call jo database connect krega
 connectsToDB();
