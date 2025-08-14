@@ -105,7 +105,7 @@ app.post('/api/v1/signin', async (req, res) => {
         }
 
         // compare the password
-        const isMatchPassword = bcrypt.compare(password, existingUser.password);
+        const isMatchPassword = await bcrypt.compare(password, existingUser.password);
         if(!isMatchPassword) {
             return res.status(400).json({
                 message: "icorrect password"
@@ -126,6 +126,7 @@ app.post('/api/v1/signin', async (req, res) => {
         })
     }
 });
+
 
 // function call jo database connect krega
 connectsToDB();
