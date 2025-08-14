@@ -1,6 +1,10 @@
-import React from 'react';
+import { useState } from 'react';
 
 function Signup() {
+    const [fullName, setName] = useState('');
+    const [email, setEamil] = useState('');
+    const [password, setPassword] = useState('');
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-300">
       <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
@@ -10,13 +14,46 @@ function Signup() {
 
         <p className="text-sm text-gray-500 text-center mb-6">Signup Below</p>
 
-        <input type="text" placeholder="Fullname" className="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+        <input type="text" placeholder="Fullname" className="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+           onChange={(e) => {
+               setName(e.target.value);
+           }}
+        />
         
-        <input type="email" placeholder="Email" className="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+        
+        <input type="email" placeholder="Email" className="w-full px-4 py-2 mb-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+           onChange={(e) => {
+               setEamil(e.target.value);
+           }}
+        />
 
-        <input type="password" placeholder="Password" className="w-full px-4 py-2 mb-6 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+        <input type="password" placeholder="Password" className="w-full px-4 py-2 mb-6 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+           onChange={(e) => {
+            setPassword(e.target.value);
+           }}
+        />
 
-        <button className="w-full bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600 transition duration-200">Sign Up</button>
+        <button className="w-full bg-blue-500 text-white py-2 rounded-lg font-semibold hover:bg-blue-600 transition duration-200"
+           onClick={() => {
+            fetch('http://localhost:3000/api/v1/signup', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    fullName: fullName,
+                    email: email,
+                    password: password
+                })
+            }).then((resp) => {
+                return resp.json();
+            }).then((data) => {
+                console.log(data);
+            }).catch((err) => {
+                console.log(`error ${err}`)
+            })
+         }}
+        >Sign Up</button>
       </div>
     </div>
   );
