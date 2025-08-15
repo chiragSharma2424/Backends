@@ -49,6 +49,8 @@ function Signup() {
                 return resp.json();
             }).then((data) => {
                 console.log(data);
+                console.log(data.token);
+                localStorage.setItem('token', data.token);
             }).catch((err) => {
                 console.log(`error ${err}`)
             })
