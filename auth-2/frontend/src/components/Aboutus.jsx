@@ -26,10 +26,10 @@ function Aboutus() {
             <a href="https://github.com/chiragSharma2424" className="text-indigo-600 hover:underline" target="_blank" rel="noopener noreferrer">https://github.com/chiragSharma2424</a>
           </p>
           <p>
-
             <span className="font-semibold">Email:</span>{" "}
             <a href="mailto:sharmachirag242004@gmail.com" className="text-indigo-600 hover:underline">sharmachirag242004@gmail.com</a>
           </p>
+          <a href="https://drive.google.com/file/d/1r7rvoKMEeEUGYhgk5jPkKmxdUF11ymvA/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">Resume</a>
         </div>
       </div>
     </div>

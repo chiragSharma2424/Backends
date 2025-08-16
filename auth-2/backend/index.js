@@ -93,14 +93,14 @@ app.post('/api/v1/signup', async (req, res) => {
 // signin function, yha pe token assign hoga
 app.post('/api/v1/signin', async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, password } = req.headers;
 
         if(!email || !password) {
             return res.status(400).json({
                 message: "Invalid credentials"
             })
         }
-
+        
         const existingUser = await User.findOne({email});
         if(!existingUser) {
             return res.status(400).json({
@@ -109,7 +109,7 @@ app.post('/api/v1/signin', async (req, res) => {
         }
 
         // compare the password
-        const isMatchPassword = await bcrypt.compare(password, existingUser.password);
+        const isMatchPassword = bcrypt.compare(password, existingUser.password);
         if(!isMatchPassword) {
             return res.status(400).json({
                 message: "icorrect password"
